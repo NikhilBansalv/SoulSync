@@ -1,0 +1,13 @@
+# Node
+frontend/node_modules
+frontend/build
+
+# Python
+backend/__pycache__/
+backend/.env
+ml-service/__pycache__/
+
+# VSCode
+.vscode/
+# ignore local .env files
+*.env
