@@ -15,7 +15,9 @@ import {
   Avatar,
   Chip,
   Fade,
-  Slide
+  Slide,
+  Container,
+  Divider
 } from '@mui/material';
 import { 
   Favorite, 
@@ -208,6 +210,130 @@ function Navigation() {
   );
 }
 
+// Footer component
+function Footer() {
+  return (
+    <Fade in timeout={1200}>
+      <Box
+        component="footer"
+        sx={{
+          mt: 'auto',
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          boxShadow: '0 -8px 32px 0 rgba(31, 38, 135, 0.37)',
+          backdropFilter: 'blur(8px)',
+          borderTop: '1px solid rgba(255, 255, 255, 0.18)',
+          position: 'relative',
+          overflow: 'hidden',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.03"%3E%3Ccircle cx="36" cy="12" r="1.5"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
+            animation: 'float 6s ease-in-out infinite'
+          }
+        }}
+      >
+        <Container maxWidth="lg">
+          <Box sx={{ py: 4, position: 'relative', zIndex: 1 }}>
+
+
+            {/* Main footer content */}
+            <Box sx={{ textAlign: 'center' }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: 'rgba(255, 255, 255, 0.9)',
+                    fontWeight: 500,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 1
+                  }}
+                >
+                  Made with
+                  <Box
+                    sx={{
+                      display: 'inline-flex',
+                      animation: 'pulse 2s infinite'
+                    }}
+                  >
+                    <Favorite sx={{ color: '#FF6B6B', fontSize: '1.2rem' }} />
+                  </Box>
+                  by
+                  <Box
+                    component="span"
+                    sx={{
+                      background: 'linear-gradient(45deg, #FFE66D, #FF6B6B)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      fontWeight: 'bold',
+                      fontSize: '1.1rem'
+                    }}
+                  >
+                    Nikhil
+                  </Box>
+                </Typography>
+              </Box>
+              
+              <Typography
+                variant="body2"
+                sx={{
+                  color: 'rgba(255, 255, 255, 0.7)',
+                  fontSize: '0.9rem'
+                }}
+              >
+                © {new Date().getFullYear()} SoulSync. All rights reserved.
+              </Typography>
+            </Box>
+
+            {/* Decorative hearts */}
+            <Box
+              sx={{
+                position: 'absolute',
+                top: '20px',
+                left: '20px',
+                opacity: 0.1,
+                animation: 'float 4s ease-in-out infinite',
+                fontSize: '2rem'
+              }}
+            >
+              💖
+            </Box>
+            <Box
+              sx={{
+                position: 'absolute',
+                top: '30px',
+                right: '30px',
+                opacity: 0.1,
+                animation: 'float 4s ease-in-out infinite 2s',
+                fontSize: '1.5rem'
+              }}
+            >
+              💝
+            </Box>
+            <Box
+              sx={{
+                position: 'absolute',
+                bottom: '20px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                opacity: 0.1,
+                animation: 'float 4s ease-in-out infinite 1s',
+                fontSize: '1.2rem'
+              }}
+            >
+              💕
+            </Box>
+          </Box>
+        </Container>
+      </Box>
+    </Fade>
+  );
+}
+
 // Protected Route component
 function ProtectedRoute({ children }) {
   const { user } = useAuth();
@@ -229,12 +355,14 @@ function AppContent() {
       <Box 
         sx={{
           minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
           background: 'linear-gradient(to bottom, #f5f7ff, #e6e9ff)',
           backgroundAttachment: 'fixed',
         }}
       >
         <Navigation />
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ flex: 1, p: 3 }}>
           <Routes>
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
@@ -257,6 +385,7 @@ function AppContent() {
             <Route path="/" element={<RegisterPage />} />
           </Routes>
         </Box>
+        <Footer />
       </Box>
       
       {/* Global Styles */}
