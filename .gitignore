@@ -10,4 +10,4 @@ ml-service/__pycache__/
 # VSCode
 .vscode/
 # ignore local .env files
-*.env
+*.env.example
