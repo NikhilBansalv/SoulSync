@@ -80,28 +80,34 @@ def get_profile(name: str):
     return user
 
 # --- Protected Endpoints ---
-
 @router.get("/matches/{name}")
 def get_matches(
     name: str,
-    current_user: str = Depends(get_current_user)     # ensure valid JWT
+    current_user: str = Depends(get_current_user)
 ):
     # Fetch the named user
     user = users_collection.find_one({"name": name}, {"_id": 0})
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
 
-    # Call ML microservice to compute scores
+    # Determine opposite gender
+    target_gender = "Female" if user["sex"].lower() == "male" else "Male"
+
     ml_url = os.getenv("ML_URL", "http://localhost:8100/score")
     matches: List[Dict[str, Any]] = []
 
-    for other in users_collection.find({"name": {"$ne": name}}, {"_id": 0}):
+    for other in users_collection.find(
+        {
+            "name": {"$ne": name},
+            "sex": {"$regex": f"^{target_gender}$", "$options": "i"}
+        },
+        {"_id": 0}
+    ):
         resp = httpx.post(ml_url, json={"profile1": user, "profile2": other})
         if resp.status_code == 200:
             score = resp.json().get("score")
             matches.append({"name": other["name"], "score": score})
 
-    # Sort descending and return top 5
     matches.sort(key=lambda x: x["score"], reverse=True)
     return matches[:5]
 
