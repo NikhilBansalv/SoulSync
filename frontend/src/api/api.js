@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE = "https://soulsync-backend-pb6z.onrender.com";
+const API_BASE = "http://localhost:8000";
 
 // Create an Axios instance
 const api = axios.create({

@@ -4,17 +4,14 @@ import { getProfile, createProfile, updateProfile } from '../api/profile';
 import '../styles/ProfilePage.css';
 
 const initialData = {
-  // Step 1: Basic info
   age: '',
   gender: '',
   location: '',
-  // Step 2: Personality (Big Five: 1–5)
   openness: 3,
   conscientiousness: 3,
   extraversion: 3,
   agreeableness: 3,
   neuroticism: 3,
-  // Step 3: Lifestyle & Interests
   hobbies: [],       // e.g. ['Sports','Music']
   smoking: 'no',     // 'yes' | 'no' | 'occasionally'
   drinking: 'no',    // same options

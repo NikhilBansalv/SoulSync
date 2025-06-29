@@ -1,5 +1,3 @@
-// src/pages/MatchesPage.js
-
 import React, { useState } from 'react';
 import { getMatches } from '../api/api';
 import { 

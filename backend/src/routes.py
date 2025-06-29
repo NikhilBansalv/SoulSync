@@ -93,7 +93,7 @@ def get_matches(
     # Determine opposite gender
     target_gender = "Female" if user["sex"].lower() == "male" else "Male"
 
-    ml_url = os.getenv("ML_URL", "https://soulsync-ml.onrender.com/score")
+    ml_url = os.getenv("ML_URL", "http://localhost:8100/score")
     matches: List[Dict[str, Any]] = []
 
     for other in users_collection.find(
@@ -113,7 +113,7 @@ def get_matches(
 
 @router.post("/compare-and-store", response_model=dict)
 async def compare_and_store(payload: dict):
-    ml_url = os.getenv("ML_URL", "https://soulsync-ml.onrender.com/score")
+    ml_url = os.getenv("ML_URL", "http://localhost:8100/score")
 
     # Call ML microservice to compute compatibility score
     async with httpx.AsyncClient() as client:

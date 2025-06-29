@@ -1,4 +1,3 @@
-// src/pages/ComparePage.js
 import React, { useState } from 'react';
 import {
   Container, Paper, Typography, TextField, Button,
