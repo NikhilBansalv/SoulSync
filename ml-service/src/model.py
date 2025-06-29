@@ -12,7 +12,6 @@ def jaccard(list1: List[str], list2: List[str]) -> float:
 
 
 def score_profiles(v1: Dict[str, float], v2: Dict[str, float]) -> float:
-    # Extract and remove hobbies for separate handling
     h1 = v1.pop('hobbies', [])
     h2 = v2.pop('hobbies', [])
 

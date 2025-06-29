@@ -1,5 +1,3 @@
-# ml-service/src/preprocessing.py
-
 def profile_to_vector(p: dict) -> dict:
     # 1) Normalize age as a distance from an “ideal” age (e.g. 30) over range 18–80
     ideal_age = 30
