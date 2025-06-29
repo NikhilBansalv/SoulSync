@@ -34,3 +34,10 @@ export const getMatches = (name) =>
 
 export const compareProfiles = (payload) =>
   api.post("/compare-and-store", payload);
+
+export const getUsernameCompatibility = async (user1, user2) => {
+  return await axios.post(`${process.env.REACT_APP_API_URL}/username-compatibility`, {
+    user1,
+    user2
+  });
+};

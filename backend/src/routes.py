@@ -1,5 +1,3 @@
-# backend/src/routes.py
-
 from fastapi import APIRouter, HTTPException, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
@@ -19,6 +17,10 @@ JWT_SECRET = os.getenv("JWT_SECRET", "supersecret")       # ensure set in .env
 JWT_ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
 
 security = HTTPBearer()
+
+class UsernamePair(BaseModel):
+    user1: str
+    user2: str
 
 def get_current_user(
     credentials: HTTPAuthorizationCredentials = Depends(security)
@@ -133,3 +135,31 @@ async def compare_and_store(payload: dict):
         "score": result["score"],
         "message": "Comparison stored successfully."
     }
+
+@router.post("/username-compatibility")
+def username_compatibility(data: UsernamePair):
+    u1, u2 = data.user1.lower(), data.user2.lower()
+
+    common_chars = set(u1) & set(u2)
+    common_score = len(common_chars) * 10
+    common_score = min(common_score, 100)
+
+    initial_score = 20 if u1[0] == u2[0] else 0
+
+    length_penalty = abs(len(u1) - len(u2)) * 2
+
+    vowels = set('aeiou')
+    common_vowels = set(u1) & set(u2) & vowels
+    vowel_score = len(common_vowels) * 5
+
+    score = common_score + initial_score + vowel_score - length_penalty
+    if score >= 70:
+        message = "💖 You're name twins! Totally in sync!"
+    elif score >= 50:
+        message = "✨ A charming similarity in your names!"
+    elif score >= 30:
+        message = "😄 A few sparks from your usernames!"
+    else:
+        message = "🔍 Not much in common, but opposites attract!"
+
+    return { "score": score, "message": message }

@@ -1,23 +1,10 @@
 import React, { useState } from 'react';
 import { getMatches } from '../api/api';
 import { Link } from 'react-router-dom';
-import { 
-  Container, 
-  TextField, 
-  Button, 
-  Typography, 
-  Grid, 
-  Paper,
-  Card,
-  CardContent,
-  Avatar,
-  Box,
-  Chip,
-  LinearProgress
-} from '@mui/material';
+import UsernameMessageCard from './UsernameMessageCard';
+import {Container, TextField, Button, Typography, Grid, Paper,Card,CardContent,Avatar,Box,Chip,LinearProgress}from '@mui/material';
 import { Person, Stars, Favorite } from '@mui/icons-material';
 
-// Enhanced MatchCard component with cute, compact styling
 function MatchCard({ name, score }) {
   const getScoreColor = (score) => {
     if (score >= 80) return '#ff6b9d'; // Soft pink
@@ -221,6 +208,7 @@ export default function MatchesPage() {
             {matches.map(m => (
               <Grid item key={m.name}>
                 <MatchCard name={m.name} score={m.score} />
+                <UsernameMessageCard user1={name} user2={m.name} />
                 <Button
                   component={Link}
                   to={`/chat/${encodeURIComponent(m.name)}`}
