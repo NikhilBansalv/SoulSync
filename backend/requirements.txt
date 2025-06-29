@@ -6,3 +6,5 @@ python-dotenv
 bcrypt
 python-jose[cryptography]
 python-dotenv
+dnspython
+certifi
