@@ -4,6 +4,7 @@ import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import MatchesPage from './pages/MatchesPage';
 import ComparePage from './pages/ComparePage';
+import ChatPage from './pages/ChatPage';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { 
   AppBar, 
@@ -381,6 +382,15 @@ function AppContent() {
                   <ComparePage />
                 </ProtectedRoute>
               } 
+            />
+
+            <Route
+              path="/chat/:otherName"
+              element={
+                <ProtectedRoute>
+                  <ChatPage />
+                </ProtectedRoute>
+              }
             />
             <Route path="/" element={<RegisterPage />} />
           </Routes>

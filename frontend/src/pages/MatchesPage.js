@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { getMatches } from '../api/api';
+import { Link } from 'react-router-dom';
 import { 
   Container, 
   TextField, 
@@ -220,6 +221,15 @@ export default function MatchesPage() {
             {matches.map(m => (
               <Grid item key={m.name}>
                 <MatchCard name={m.name} score={m.score} />
+                <Button
+                  component={Link}
+                  to={`/chat/${encodeURIComponent(m.name)}`}
+                  variant="outlined"
+                  size="small"
+                  sx={{ mt: 1 }}
+                >
+                  Chat
+                </Button>
               </Grid>
             ))}
           </Grid>
