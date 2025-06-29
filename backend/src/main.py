@@ -9,7 +9,8 @@ app = FastAPI(title="Matchmaking Backend API")
 # Allow your React dev origin
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["http://localhost:3000",
+                   "https://soul-sync-two.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
